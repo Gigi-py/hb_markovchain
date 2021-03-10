@@ -2,6 +2,8 @@
 
 from random import choice
 
+#importing the choice method from the random library
+
 def open_and_read_file(file_path):
     
 
@@ -43,6 +45,8 @@ def make_chains(text_string):
     chains = {}
     # your code goes here
     words = text_string.split()
+    words.append(None)
+    print(words)
     for i in range(len(words)-2):
         key = (words[i],words[i+1])
         values = words[i+2]
@@ -50,17 +54,18 @@ def make_chains(text_string):
             chains[key] = [] # we add the first key to the chain and define its value as an empty list that we can start putting values in
         chains[key].append(values) # step to put values into the []
     
-    print(chains)
+    return chains
 
 def make_text(chains):
     """Return text from chains."""
-
-    key = choice(list(chains.key())) #picking a random pair of keys in the original dictionary to start
-    words = [key[0], key[1]] # create a new list of words that start collecting the random words that we are generating
+    
+    key = choice(list(chains.keys())) #picking a random pair of keys in the original dictionary to start
+    words = [key[0], key[1]] # create a new link that start collecting the random words that we are generating
     word = choice(chains[key]) # random word pulled from the value(which is a list) at the current key
     # your code goes here
 
     while word is not None:
+        
         key = (key[1], word) # once we used this key(which was randomly chosen), we update the new key with the second word, and a random word that comes after it.
         words.append(word) # we add the random word to the words list so that we can build the paragrah
         word = choice(chains[key]) # we generate a new random word now because the key is updated as well with the new pair
@@ -80,3 +85,5 @@ chains = make_chains(input_text)
 random_text = make_text(chains)
 
 print(random_text)
+
+#print(a_dict)
